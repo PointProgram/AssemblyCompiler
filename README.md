@@ -403,7 +403,7 @@ Consider the mod field:
 • With mod=11, the memory address is not specified, and the r/m field specifies the data register code.
 
 Code in the field r/m | Register addresses | Segment register that is used by default
-
+```
 000     |   BX+SI   |   DS
 001     |   BX+DI   |   DS
 010     |   BP+SI   |   SS
@@ -412,6 +412,7 @@ Code in the field r/m | Register addresses | Segment register that is used by de
 101     |   DI      |   DS
 110     |   BP      |   SS
 111     |   BX      |   DS
+```
 
 The following conclusions can be drawn from the table, which are also valid for modern microprocessors of the family with 16-bit addressing:
 1. With 16-bit addressing, there are only four registers - BX, BP, SI and
