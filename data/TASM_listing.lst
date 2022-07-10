@@ -1,0 +1,84 @@
+Turbo Assembler	 Version 4.1	    	    Page 1
+test.ASM
+      1					 .486
+      2	    0000			 DATAA		 SEGMENT USE16
+      3	    0000  53 74	72 5F 61 73 6D			 STRING	 DB		 'Str_asm'
+      4	    0007  78536FDA				 VD		 DD		 78536FDAH
+      5	    000B  4C34					 VW		 DW		 4C34H
+      6	    000D  2BF2					 VWA		 DW		 2BF2H
+      7
+      8	    000F			 DATAA		 ENDS
+      9
+     10	    0000			 DATAB		 SEGMENT	  USE16
+     11	    0000  678C					 DA		 DW		 678CH
+     12	    0002  5432					 DC		 DW		 5432H
+     13	    0004  00000000sr				 ADRESS	 DD		 FPROC
+     14	    0008  0000000Bsr				 ADR	     DD		 PROCA
+     15	    000C			 DATAB ENDS
+     16	    0000			 CODE	 SEGMENT  USE16
+     17
+     18					 ASSUME	CS:CODE, DS:DATAA, ES:DATAB
+     19
+     20	    0000			 PROCESS	 PROC
+     21	    0000  3E: 8B 82 000Br			 MOV AX, VW[BP + SI]
+     22	    0005  3E: 8F 82 000Dr			 POP	 VWA[BP+SI]
+     23	    000A  C3					 RET
+     24	    000B			 PROCESS	 ENDP
+     25
+     26	    000B			 PROCA		 PROC
+     27	    000B  B9 0000r				 MOV CX, OFFSET	DA
+     28	    000E  75 F0					 JNE PROCESS
+     29	    0010  C3					 RET
+     30	    0011			 PROCA		 ENDP
+     31	    0011			 START	 PROC
+     32	    0011  75 17	90 90			 JNE		 LP
+     33	    0015  26: FF 36 0000r		 PUSH DA
+     34	    001A  26: FF 36 0002r		 PUSH DC
+     35	    001F  E8 FFDE			 CALL	 PROCESS
+     36	    0022  BB 0000r			 MOV BX, OFFSET	PROCESS
+     37	    0025  68 0007r			 PUSH	 OFFSET	VD
+     38	    0028  FF D3				 CALL BX
+     39	    002A				 LP:
+     40	    002A  26: FF 1E 0004r		 CALL ADRESS
+     41	    002F			 START	 ENDP
+     42	    002F			 CODE	 ENDS
+     43	    0000			 CODEB SEGMENT USE16
+     44					 ASSUME	CS:CODEB, ES:DATAA, DS:DATAB
+     45
+     46	    0000			 FPROC PROC
+     47	    0000  B9 0000r				 MOV CX, OFFSET	STRING
+     48	    0003  FF 1E	0008r				 CALL ADR
+     49	    0007  26: FF 99 0007r			 CALL VD[BX + DI]
+     50	    000C			 FPROC ENDP
+     51
+     52	    000C			 CODEB ENDS
+     53					 END	 START
+Turbo Assembler	 Version 4.1	    	    Page 2
+Symbol Table
+Symbol Name		Type   Value			   Cref	(defined at #)
+??DATE			Text   "05/26/20"
+??FILENAME		Text   "test2	"
+??TIME			Text   "13:36:58"
+??VERSION		Number 040A
+@CPU			Text   1F1FH			   #1
+@CURSEG			Text   CODEB			   #2  #10  #16	 #43
+@FILENAME		Text   TEST2
+@WORDSIZE		Text   2			   #1  #2  #10	#16  #43
+ADR			Dword  DATAB:0008		   #14	48
+ADRESS			Dword  DATAB:0004		   #13	40
+DA			Word   DATAB:0000		   #11	27  33
+DC			Word   DATAB:0002		   #12	34
+FPROC			Near   CODEB:0000		   13  #46
+LP			Near   CODE:002A		   32  #39
+PROCA			Near   CODE:000B		   14  #26
+PROCESS			Near   CODE:0000		   #20	28  35	36
+START			Near   CODE:0011		   #31	53
+STRING			Byte   DATAA:0000		   #3  47
+VD			Dword  DATAA:0007		   #4  37  49
+VW			Word   DATAA:000B		   #5  21
+VWA			Word   DATAA:000D		   #6  22
+Groups & Segments	Bit Size Align	Combine	Class	   Cref	(defined at #)
+CODE			16  002F Para	none		   #16	18
+CODEB			16  000C Para	none		   #43	44
+DATAA			16  000F Para	none		   #2  18  44
+DATAB			16  000C Para	none		   #10	18  44
