@@ -5,6 +5,17 @@
 Creation of a text listing file (extension .lst) similar to the listing file of the MASM or TASM compiler for programs in the Assembler language.
 Given that creating a compiler is a time-consuming process, significant restrictions are used on the list of valid machine instructions, modes of addressing data and commands, and valid directives, which are a subset of the standard language of the Intel Processor Assembly.
 
+## Technologies
+Project is created with:
+* C++
+* gcc: version 6.3.0
+
+	
+## Setup
+git clone and run a program with the following makefile:
+
+<code>$ make</code>
+
 
 # Syntax and rules for writing a program in the Assembler language
 
