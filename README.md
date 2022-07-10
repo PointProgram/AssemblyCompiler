@@ -19,6 +19,7 @@ git clone and run a program with the following makefile:
 
 # Syntax and rules for writing a program in the Assembler language
 
+```
 *Identifiers*
 Contains capital letters of the Latin alphabet and numbers. They start with a letter. The length of identifiers is no more than 7 characters
 *Constants*
@@ -45,6 +46,7 @@ Call (with direct and indirect addressing, intra-segment and inter-segment)
 Where **reg** is an 8- or 16-bit RZP
 **mem** is the address of the operand in memory
 **imm** – constant or offset value in the segment (OFFSET val1, OFFSET label1, etc.)
+```
 
 # Constraints and features
 
