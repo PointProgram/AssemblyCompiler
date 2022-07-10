@@ -116,9 +116,11 @@ You cannot have two labels (DISP) in one command
       size byte, word or double word;
 
    +rb, +rw, +rd – command operation code byte in the lower three bits
-      contains the data register number of the corresponding bit rate.```
+      contains the data register number of the corresponding bit rate.
+```
      
-```FB			     sti
+```
+FB			     sti
 ==| FB STI
 
 
@@ -267,7 +269,8 @@ bool forward
 if !far and !forward then 2
 else then 6
 
-offset = destination - current + size + unused current size```
+offset = destination - current + size + unused current size
+```
 
 ## Byte calculation
 
