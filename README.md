@@ -68,8 +68,8 @@ Operand types:
    Memory (8, 32/16)
    Label (offset32/16)
 
-```
-opcode
+
+```opcode
 modrm
 mod = 00
 rm = 100 (sib)
@@ -90,8 +90,7 @@ mov ebx, ecx     - reg32 | reg32
 mov [ebx], [ebx] - ERROR
 mov 14, 51       - ERROR
 mov [ebx], 52    - mem32 | const8
-mov ebx, 3452    - reg32 | const32
-```
+mov ebx, 3452    - reg32 | const32```
 
 You can't have two constants in the same command
 You can't have two memories in one command
@@ -99,7 +98,7 @@ You cannot have two labels (DISP) in one command
 
 # Marking rules
 
-    /r – signals that the command has a mod r/m byte in which the reg
+    ```/r – signals that the command has a mod r/m byte in which the reg
       contains the data register number;
 
    /digit (from 0 to 7) - indicates that the command has a mod r/m byte,
@@ -117,10 +116,9 @@ You cannot have two labels (DISP) in one command
       size byte, word or double word;
 
    +rb, +rw, +rd – command operation code byte in the lower three bits
-      contains the data register number of the corresponding bit rate.
-
-'''
-FB			     sti
+      contains the data register number of the corresponding bit rate.```
+     
+```FB			     sti
 ==| FB STI
 
 
@@ -269,8 +267,7 @@ bool forward
 if !far and !forward then 2
 else then 6
 
-offset = destination - current + size + unused current size
-'''
+offset = destination - current + size + unused current size```
 
 ## Byte calculation
 
@@ -309,18 +306,23 @@ General algorithm for calculating bytes:
 
 As a result of the lexical analysis, a table of lexemes of the next line of the program is formed.
 A lexeme is one or more characters in a string, which the Assembler treats as a single object. Lexemes are "indivisible atoms" of the programming language. In this connection, the term "terminal symbol" of the programming language is often used. The following lexemes are distinguished in the Assembler language:
-• Identifiers – sequences of letters and numbers that begin with a letter.
+- Identifiers – sequences of letters and numbers that begin with a letter.
 Letters include lowercase and uppercase letters of the respective alphabets. In MASM and TASM, this alphabet is the Latin alphabet, as well as the symbols _, @, ?, $. It is generally accepted that letters are not case sensitive. At the same time, lowercase and uppercase letters in ASCII have different codes. Therefore, when processing identifiers, the compiler converts all lowercase letters to uppercase. If the compiler is developed, for example, in Ukraine, then it is appropriate to enter the letters of the Ukrainian alphabet as identifier letters. The Latin and Ukrainian alphabets have many similar-looking letters, but they have different ASCII codes (eg a, e, p, x, etc.). In order to avoid potential errors related to incorrect switching of the alphabet when entering initial programs, the compiler must choose the same code for letters of the Latin and Ukrainian alphabets that are identical in appearance when processing identifiers. The length of the identifier is practically unlimited, but the first 32 characters are significant.
-• Numeric constants – sequences of numbers and some letters that begin with a number.
+- Numeric constants – sequences of numbers and some letters that begin with a number.
 
 There are binary, octal, decimal and hexadecimal constants. The letters a, b, c, d, e, f and the base letters of the numbering system – b, o, q, d, h – are permissible letters of the numerical constant (they do not differ as in the case of identifiers).
-Binary constants consist of the digits 0 and 1 and necessarily end with the letter b.
-Octal constants consist of numbers from 0 to 7 and necessarily end with the letter o or q.
-Decimal constants consist of digits from 0 to 9 and can end with the letter d. The peculiarity of decimal constants is that they allow the absence of the letter d. The sign of the end of the decimal constant in this case is the appearance of a symbol that is not included in the list of digits from 0 to 9.
-Hexadecimal constants consist of numbers from 0 to 9 and the letters a, b, c, d, e, f and necessarily end with the letter h. If the first character of a hexadecimal constant is a letter, it must first be set to 0 so that the compiler can distinguish between an identifier and a numeric constant.
-• Text constants – a sequence of arbitrary characters that can be entered from the keyboard and that begin and end with the symbol " or ". Symbols in text constants are not subject to any transformation.
-• Token separators are space, tab, and semicolon characters.
-• Single-symbol tokens - all other symbols that are included in the alphabet of the Assembler language.
+
+- Binary constants consist of the digits 0 and 1 and necessarily end with the letter b.
+
+- Octal constants consist of numbers from 0 to 7 and necessarily end with the letter o or q.
+
+- Decimal constants consist of digits from 0 to 9 and can end with the letter d. The peculiarity of decimal constants is that they allow the absence of the letter d. The sign of the end of the decimal constant in this case is the appearance of a symbol that is not included in the list of digits from 0 to 9.
+
+- Hexadecimal constants consist of numbers from 0 to 9 and the letters a, b, c, d, e, f and necessarily end with the letter h. If the first character of a hexadecimal constant is a letter, it must first be set to 0 so that the compiler can distinguish between an identifier and a numeric constant.
+
+- Text constants – a sequence of arbitrary characters that can be entered from the keyboard and that begin and end with the symbol " or ". Symbols in text constants are not subject to any transformation.
+- Token separators are space, tab, and semicolon characters.
+- Single-symbol tokens - all other symbols that are included in the alphabet of the Assembler language.
 A separator between two lexemes is mandatory if the concatenation (at docking) of these lexemes is also a lexeme.
 
 ## Get the sentence structure
